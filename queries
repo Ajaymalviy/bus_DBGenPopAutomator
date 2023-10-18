@@ -1,0 +1,17 @@
+use myproject;
+
+-->select first_name from conductor where conductor_id in( select conductor_id from ticket where bus_id in(select max(bus_id) from ticket));
+desc ticket;
+-->select ticket_id from ticket where journey_date<2023-08-15 and conductor_id in ( select c.conductor_id as conductor ,p.platform_id as platform from ticket as c ,ticket as p where p.platform_id=c.conductor_id );
+-->select bus_id from ticket where platform_id in (select platform_id where platform_number>5);
+select * from platform;
+-->select bus_id from ticket where platform_id in ( select  platform_id from platform where platform_number >=5);
+-->select p1.bus_id,p2.platfrom_id from ticket p1,ticket p2 where p2.platform_number>5;
+use myproject;
+-->select first_name from conductor where conductor_id in( select conductor_id from ticket where bus_id in(select max(bus_id) from ticket));
+-->select c.first_name from conductor c inner join ticket t on c.conductor_id = t.conductor_id inner join (select MAX(bus_id) as  m from ticket) max_bus on t.bus_id = max_bus.m;
+-->select  t.bus_id from ticket t inner join platform p on t.platform_id = p.platform_id where p.platform_number >= 5;
+-->select t.ticket_id, t.journey_date, t.conductor_id, t.platform_id from  ticket t inner join conductor c on t.conductor_id = c.conductor_id inner join platform p on t.platform_id = p.platform_id where t.journey_date < '2023-08-15'; 
+use myproject;
+-->select t.ticket_id, t.journey_date, t.conductor_id, t.platform_id from  ticket t inner join conductor c on t.conductor_id = c.conductor_id inner join platform p on t.platform_id = p.platform_id where t.journey_date < '2023-08-15'; 
+-->SELECT d.driver_id, d.first_name, d.last_name, d.salary FROM driver d WHERE d.license_expiry_date < CURDATE();
